@@ -5,6 +5,7 @@ from flask_assets import Bundle, Environment
 css = Bundle(
     'libs/bootstrap/dist/css/bootstrap.css',
     'css/style.css',
+    'css/histoire.css',
     filters='cssmin',
     output='public/css/common.css'
 )

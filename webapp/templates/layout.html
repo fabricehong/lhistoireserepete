@@ -33,8 +33,9 @@
 {% with form=form  %}
 {% include "nav.html" %}
 {% endwith %}
-
 <header>{% block header %}{% endblock %}</header>
+{% block article %}{% endblock %}
+
 <div class="{% block content_class %}container{% endblock content_class %}">
 
   <div role="main">
