@@ -5,6 +5,7 @@ from flask_login import login_required, login_user, logout_user
 
 from webapp.extensions import login_manager
 from webapp.public.forms import LoginForm
+from webapp.scraperletemps.scraperletemps import get_todays_news
 from webapp.user.forms import RegisterForm
 from webapp.user.models import User
 from webapp.utils import flash_errors
@@ -20,6 +21,16 @@ def load_user(user_id):
 
 @blueprint.route('/', methods=['GET', 'POST'])
 def home():
+    article = get_todays_news()
+
+    links = [
+        {
+            "link" : "http://sdfsdf",
+            "title" : "title",
+            "archive_id" : "A34F"
+        }
+    ]
+
     """Home page."""
     form = LoginForm(request.form)
     # Handle logging in
@@ -31,7 +42,11 @@ def home():
             return redirect(redirect_url)
         else:
             flash_errors(form)
-    return render_template('public/home.html', form=form)
+    return render_template(
+        'public/home.html',
+        form=form,
+        article=article
+    )
 
 @blueprint.route('/logout/')
 @login_required
