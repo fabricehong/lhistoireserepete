@@ -6,6 +6,9 @@ import requests
 # ----------------- Functions ----------------- #
 #################################################
 
+def get_todays_news():
+	return scrapeArticle("http://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare")
+
 # Scrape an article from Le Temps, starting from a URL
 # exemple de input: http://www.letemps.ch/opinions/2016/06/16/histoire-une-bretelle-soutien-gorge
 # balises d'intérêt:
