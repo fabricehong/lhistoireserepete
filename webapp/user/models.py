@@ -63,3 +63,20 @@ class User(UserMixin, SurrogatePK, Model):
     def __repr__(self):
         """Represent instance as a unique string."""
         return '<User({username!r})>'.format(username=self.username)
+
+
+class ArticleRelation(UserMixin, SurrogatePK, Model):
+    """An article relation"""
+
+    __tablename__ = 'users'
+    article1_id = Column(db.String(80), unique=True, nullable=False)
+    article2_id = Column(db.String(80), unique=True, nullable=False)
+
+    def __init__(self, article1_id, article2_id, **kwargs):
+        """Create instance."""
+        db.Model.__init__(self, article1_id=article1_id, article2_id=article2_id, **kwargs)
+
+
+    def __repr__(self):
+        """Represent instance as a unique string."""
+        return '<ArticleRelation({article1_id!r}, {article2_id!r})>'.format(article1_id=self.article1_id, article2_id=self.article2_id)

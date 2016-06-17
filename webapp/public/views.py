@@ -5,7 +5,7 @@ from flask_login import login_required, login_user, logout_user
 
 from webapp.extensions import login_manager
 from webapp.public.forms import LoginForm
-from webapp.scraperletemps.scraperletemps import get_todays_news
+from webapp.scraperletemps.scraperletemps import get_todays_news, scrapeArticle
 from webapp.user.forms import RegisterForm
 from webapp.user.models import User
 from webapp.utils import flash_errors
@@ -47,6 +47,44 @@ def home():
         form=form,
         article=article
     )
+
+def get_archive_from_id(id, page, keywords):
+    return {
+        "url" : "http://www.letempsarchives.ch/page/%s/%s/%s" % (id, page, keywords)
+    }
+
+@blueprint.route('/compare', methods=['GET'])
+def compare(source_id, destination_id):
+    article1 = scrapeArticle(source_id)
+    article2 = get_archive_from_id("JDG_1923_07_08", 10, "conference%20de%20lausanne")
+
+    links = [
+        {
+            "link" : "http://sdfsdf",
+            "title" : "title",
+            "archive_id" : "A34F"
+        }
+    ]
+
+    """Home page."""
+    form = LoginForm(request.form)
+    # Handle logging in
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            login_user(form.user)
+            flash('You are logged in.', 'success')
+            redirect_url = request.args.get('next') or url_for('user.members')
+            return redirect(redirect_url)
+        else:
+            flash_errors(form)
+    return render_template(
+        'public/home.html',
+        form=form,
+        article1=article1,
+        article2=article2
+    )
+
+
 
 @blueprint.route('/logout/')
 @login_required

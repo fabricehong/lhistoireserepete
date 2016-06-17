@@ -1,0 +1,15 @@
+
+{% extends "layout.html" %}
+
+{% block article %}
+    <div> <!-- article 1-->
+      {% include "article.html" with article=article1 only %}
+    </div>
+    <div> <!-- article 1-->
+      {% include "article.html" with article=article2 only %}
+    </div>
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
