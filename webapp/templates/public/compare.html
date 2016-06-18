@@ -3,10 +3,15 @@
 
 {% block article %}
     <div> <!-- article 1-->
-      {% include "article.html" with article=article1 only %}
+        {% with article=article1 %}
+        {% include "public/article.html" %}
+        {% endwith %}
     </div>
     <div> <!-- article 1-->
-      {% include "article.html" with article=article2 only %}
+        {% with article=article2 %}
+        {% include "public/article.html" %}
+        {% endwith %}
+
     </div>
 {% endblock %}
 

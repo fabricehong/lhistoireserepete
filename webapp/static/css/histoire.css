@@ -4,3 +4,65 @@
 .side-panel {
   background-color: lightblue;
 }
+
+h1 {
+  font-family: "Playfair Display", "Times New Roman", Times, serif;
+  font-size: 60px;
+  font-weight: 400;
+  font-style: normal;
+  text-transform: uppercase;
+  text-align: center;
+  color: #b80021;
+}
+
+h2 {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-size: 40px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1.1;
+  text-align: left;
+  color: #323232;
+}
+
+h3 {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: left;
+  color: #b80021;
+}
+
+h4 {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1.6;
+  text-align: left;
+  color: #323232;
+}
+
+h5 {
+  font-family: Trirong, "Times New Roman", Times, serif;
+  font-size: 19px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.6;
+  text-align: left;
+  color: #404040;
+}
+
+h6 {
+  font-family: Trirong, "Times New Roman", Times, serif;
+  font-size: 15px;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.6;
+  text-align: left;
+  color: #404040;
+}
+

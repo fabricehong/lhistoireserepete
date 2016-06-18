@@ -6,7 +6,6 @@ from flask_login import login_required, login_user, logout_user
 from webapp.extensions import login_manager
 from webapp.public import articles
 from webapp.public.forms import LoginForm
-from webapp.scraperletemps.scraperletemps import get_todays_news, scrapeArticle
 from webapp.user.forms import RegisterForm
 from webapp.user.models import User
 from webapp.utils import flash_errors
@@ -22,15 +21,24 @@ def load_user(user_id):
 
 @blueprint.route('/', methods=['GET', 'POST'])
 def home():
-    article = get_todays_news()
+    #article = get_todays_news()
 
-    links = [
-        {
-            "link" : "http://sdfsdf",
+    articles.get_article("http://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare")
+    article = articles.get_article("http://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare")
+
+    system_recommendations = {
+            "date" : "date",
+            "newspaper" : "newspaper",
             "title" : "title",
-            "archive_id" : "A34F"
-        }
-    ]
+            "tags" : "termes en relation"
+    }
+
+    user_recommendations = {
+            "date" : "date",
+            "newspaper" : "newspaper",
+            "title" : "title",
+            "comment" : "comment"
+    }
 
     """Home page."""
     form = LoginForm(request.form)
@@ -46,7 +54,9 @@ def home():
     return render_template(
         'public/home.html',
         form=form,
-        article=article
+        article=article,
+        system_recommendations=system_recommendations,
+        user_recommendations=user_recommendations
     )
 
 def get_archive_from_id(id, page, keywords):
@@ -62,9 +72,8 @@ def compare():
 
     article1 = articles.get_article(article1_id)
     article2 = articles.get_article(article2_id)
-    article1 = scrapeArticle(article1.url)
-    article2 = []#get_archive_from_id("JDG_1923_07_08", 10, "conference%20de%20lausanne")
-
+    #article1 = scrapeArticle(article1.url)
+    #article2 = []#get_archive_from_id("JDG_1923_07_08", 10, "conference%20de%20lausanne")
     links = [
         {
             "link" : "http://sdfsdf",
@@ -85,7 +94,7 @@ def compare():
         else:
             flash_errors(form)
     return render_template(
-        'public/home.html',
+        'public/compare.html',
         form=form,
         article1=article1,
         article2=article2
