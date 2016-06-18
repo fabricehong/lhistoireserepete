@@ -28,8 +28,6 @@ def home():
     articles.get_article("http://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare")
     article = articles.get_article("http://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare")
 
-    user_recommendations = get_user_recommendations()
-
     """Home page."""
     form = LoginForm(request.form)
     # Handle logging in
@@ -46,7 +44,7 @@ def home():
         form=form,
         article=article,
         system_recommendations=article.get_system_recommendations(),
-        user_recommendations=user_recommendations
+        user_recommendations=article.get_user_recommendations()
     )
 
 def get_archive_from_id(id, page, keywords):
@@ -65,9 +63,6 @@ def compare():
     #article1 = scrapeArticle(article1.url)
     #article2 = []#get_archive_from_id("JDG_1923_07_08", 10, "conference%20de%20lausanne")
     
-    system_recommendations = get_system_recommendations()
-
-    user_recommendations = get_user_recommendations()
 
     """Home page."""
     form = LoginForm(request.form)
@@ -85,8 +80,8 @@ def compare():
         form=form,
         article1=article1,
         article2=article2,
-        system_recommendations=system_recommendations,
-        user_recommendations=user_recommendations
+        system_recommendations=article2.get_system_recommendations(),  # TODO
+        user_recommendations=article2.get_system_recommendations(),  # TODO
     )
 
 

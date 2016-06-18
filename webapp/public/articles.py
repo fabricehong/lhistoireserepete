@@ -70,6 +70,9 @@ class News:
         ]
         return articles
 
+    def get_user_recommendations(self):
+        return get_relations_by_id(self.id)
+
 class Archive:
     def __init__(self, id):
         parts = id.split(separator)
