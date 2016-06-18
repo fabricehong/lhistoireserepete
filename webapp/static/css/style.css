@@ -10,6 +10,11 @@ html {
 
 body {
   padding-top: 60px;
+  font-family: Trirong, "Times New Roman", Times, serif;
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 300;
+  color:#000;
 }
 
 section {
