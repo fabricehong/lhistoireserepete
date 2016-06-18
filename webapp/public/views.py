@@ -26,19 +26,9 @@ def home():
     articles.get_article("http://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare")
     article = articles.get_article("http://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare")
 
-    system_recommendations = {
-            "date" : "date",
-            "newspaper" : "newspaper",
-            "title" : "title",
-            "tags" : "termes en relation"
-    }
+    system_recommendations = get_system_recommendations()
 
-    user_recommendations = {
-            "date" : "date",
-            "newspaper" : "newspaper",
-            "title" : "title",
-            "comment" : "comment"
-    }
+    user_recommendations = get_user_recommendations()
 
     """Home page."""
     form = LoginForm(request.form)
@@ -59,6 +49,26 @@ def home():
         user_recommendations=user_recommendations
     )
 
+def get_system_recommendations():
+    return [
+        {
+            "date" : "date",
+            "newspaper" : "newspaper",
+            "title" : "title",
+            "tags" : "termes en relation"
+        },
+    ]
+
+def get_user_recommendations():
+    return [
+        {
+            "date" : "date",
+            "newspaper" : "newspaper",
+            "title" : "title",
+            "comment" : "comment"
+        },
+    ]
+
 def get_archive_from_id(id, page, keywords):
     return {
         "url" : "http://www.letempsarchives.ch/page/%s/%s/%s" % (id, page, keywords)
@@ -74,13 +84,10 @@ def compare():
     article2 = articles.get_article(article2_id)
     #article1 = scrapeArticle(article1.url)
     #article2 = []#get_archive_from_id("JDG_1923_07_08", 10, "conference%20de%20lausanne")
-    links = [
-        {
-            "link" : "http://sdfsdf",
-            "title" : "title",
-            "archive_id" : "A34F"
-        }
-    ]
+    
+    system_recommendations = get_system_recommendations()
+
+    user_recommendations = get_user_recommendations()
 
     """Home page."""
     form = LoginForm(request.form)
@@ -97,7 +104,9 @@ def compare():
         'public/compare.html',
         form=form,
         article1=article1,
-        article2=article2
+        article2=article2,
+        system_recommendations=system_recommendations,
+        user_recommendations=user_recommendations
     )
 
 
