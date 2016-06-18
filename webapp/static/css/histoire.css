@@ -66,3 +66,23 @@ h6 {
   color: #404040;
 }
 
+/* article */
+.article-container {
+	margin-top: 100px;
+}
+
+.left-column {
+	margin-right: 50px;
+}
+
+/* iframe */
+#article-iframe {
+	position: relative;
+	width: 95%;
+	height: 600px;
+}
+
+/* footer */
+footer {
+	clear: both;
+}
