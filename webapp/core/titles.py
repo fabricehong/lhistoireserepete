@@ -48,6 +48,9 @@ def scrape_title_sparql(journal, date, articlesubid):
 
     bs = BeautifulSoup(r.text)
 
-    title = bs.find('literal').text
+    try:
+        title = bs.find('literal').text
+    except:
+        title = ''
 
     return title

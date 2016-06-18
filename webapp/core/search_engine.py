@@ -62,14 +62,15 @@ def rank_articles(input_article, query_result_articles):
     ranked_results = sorted(query_result_articles, key=lambda x: x['score'], reverse=True)
 
     rank = 0
-    print(u'\nRank\tScore\tArticle title')
+    print(u'\nRank\tScore\tYear\tArticle title')
     for r in ranked_results:
         rank += 1
-        print(u'#{rank}\t\t{score}\t{content}'.format(rank=rank, score=str(r['score'])[0:6], content=r['title']))
+        print(u'#{rank}\t\t{score}\t{year}\t{content}'.format(rank=rank,
+                                                              year=r['meta_year_i'],
+                                                              score=str(r['score'])[0:6],
+                                                              content=r['title']))
 
     return sorted(query_result_articles, key=lambda x: x['score'], reverse=True)
-
-
 
 if __name__ == '__main__':
 
@@ -84,7 +85,6 @@ if __name__ == '__main__':
     # article['article_body'] = u"Des dizaines de perquisitions nécessitant une «intervention immédiate» ont été menées dans la nuit de vendredi à samedi en Belgique dans le cadre d'un dossier de terrorisme, au moment où la protection de personnalités a été renforcée sur fond de menace de nouveaux attentats.«Les éléments recueillis dans le cadre de l'instruction nécessitaient d'intervenir immédiatement» explique le parquet fédéral qui centralise les enquêtes antiterroristes en Belgique.Les perquisitions se sont déroulées dans 16 communes principalement à Bruxelles mais aussi en Flandre et en Wallonie. Le parquet n'indique pas pourquoi il a agi si rapidement."
 
     article = get_todays_news()
-    print(type(article))
     key_words = get_keywords(article)
 
     print(u'\nKey words deduced are :'.format(kw=key_words))

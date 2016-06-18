@@ -33,14 +33,11 @@ def scrape_article(source_url):
     html = response.text
     doc = BeautifulSoup(html)
 
-    title = doc.find('h1', text=True)
-    print(title)
+    title = doc.find('h1').text
     subtitle = doc.find('p', class_='lead', text=True).text
-    print(subtitle)
     # article_body = doc.find('div', class_='article_body').findChildren(recursive=False)[1]
     article_body = doc.find('div', class_='article_body').findChildren(recursive=False)[1].findAll(text=True)
     article_body = ' '.join(article_body)
-    print(article_body)
     article_info = doc.find('section', class_='article-info')
 
     # reading_time
