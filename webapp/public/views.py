@@ -22,11 +22,11 @@ def load_user(user_id):
 
 @blueprint.route('/', methods=['GET', 'POST'])
 def home():
-    article = get_todays_news()
+    #article = get_todays_news()
 
-    links = [
+    article = [
         {
-            "link" : "http://sdfsdf",
+            "link" : "http://www.letempsarchives.ch/page/JDG_1923_07_08/10/conference%20de%20lausanne",
             "title" : "title",
             "archive_id" : "A34F"
         }
