@@ -34,8 +34,15 @@ def get_keywords(title, subtitle, article_body):
 
 # Trouver les articles dans lesquels les mots apparaissent
 def find_articles(key_words_input):
+    n_articles = 20
     root_url = 'http://dhlabsrv8.epfl.ch:8983/solr/letemps_article/select?q='
-    url = (root_url + ' OR '.join(key_words_input)).replace(' ', '%20') + '&wt=json'
+    url = (root_url + ' OR '.join(key_words_input)).replace(' ', '%20') + '&wt=json&rows=20'
+    url = u"{root}{query}{parameters}".format(root=root_url,
+                                              query=' OR '.join(key_words_input).replace(' ', '%20'),
+                                              parameters='&wt=json&rows=' + str(n_articles))
+
+
+    print(url)
     page = requests.get(url)
     json_page = page.json()
     response = json_page['response']
@@ -87,7 +94,7 @@ if __name__ == '__main__':
     # article['article_body'] = u"Des dizaines de perquisitions nécessitant une «intervention immédiate» ont été menées dans la nuit de vendredi à samedi en Belgique dans le cadre d'un dossier de terrorisme, au moment où la protection de personnalités a été renforcée sur fond de menace de nouveaux attentats.«Les éléments recueillis dans le cadre de l'instruction nécessitaient d'intervenir immédiatement» explique le parquet fédéral qui centralise les enquêtes antiterroristes en Belgique.Les perquisitions se sont déroulées dans 16 communes principalement à Bruxelles mais aussi en Flandre et en Wallonie. Le parquet n'indique pas pourquoi il a agi si rapidement."
 
     article = get_todays_news()
-    key_words = get_keywords(article)
+    key_words = get_keywords(article['title'], article['subtitle'], article['article_body'])
 
     print(u'\nKey words deduced are :'.format(kw=key_words))
     for kw in key_words:

@@ -15,7 +15,7 @@ import re
 #################################################
 
 def get_todays_news():
-	return scrape_article("http://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare")
+	return scrape_article("http://www.letemps.ch/sciences/2016/06/18/traversee-atlantique-bertrand-piccard")
 
 
 # Scrape an article from Le Temps, starting from a URL
