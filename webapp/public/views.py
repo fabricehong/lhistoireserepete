@@ -39,11 +39,12 @@ def home():
             return redirect(redirect_url)
         else:
             flash_errors(form)
+    recommendations = article.get_system_recommendations()
     return render_template(
         'public/home.html',
         form=form,
         article=article,
-        system_recommendations=article.get_system_recommendations(),
+        system_recommendations=recommendations,
         user_recommendations=user_recommendations
     )
 
