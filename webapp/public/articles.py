@@ -1,3 +1,4 @@
+from webapp.scraperletemps import scraperletemps
 
 separator = "$$"
 class News:
@@ -5,7 +6,29 @@ class News:
         split_index = id.index(separator)
         self.type = id[:split_index]
         self.url = id[split_index+2:]
-        self.url = "http://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare"
+        #self.url = "http://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare"
+        self.article_metadata = None
+
+    def init_news_metadata(self):
+        self.article_metadata = scraperletemps.scrape_article(self.url)
+
+    @property
+    def title(self):
+        if (self.article_metadata is None):
+            self.init_news_metadata()
+        return self.article_metadata["title"]
+
+    @property
+    def subtitle(self):
+        if (self.article_metadata is None):
+            self.init_news_metadata()
+        return self.article_metadata["subtitle"]
+
+    @property
+    def body(self):
+        if (self.article_metadata is None):
+            self.init_news_metadata()
+        return self.article_metadata["article_body"]
 
 class Archive:
     def __init__(self, id):
