@@ -1,4 +1,5 @@
-from webapp.core import scraper
+# -*- coding: utf-8 -*-
+from webapp.core import search_engine
 
 separator = "$$"
 class News:
@@ -13,7 +14,8 @@ class News:
         #self.article_metadata = scraper.scrape_article(self.url)
         self.article_metadata = {
             "title" : "Mon titre",
-            "subtitle" : "Dans le désert du Nouveau-Mexique, qui inaugura hier l’ère atomique, une communauté célèbre la nature en vivant dans des «Ea
+            "subtitle" : "la police qui refuse de donner des précisions sur la nature de l'enquête",
+            "article_body" : "Après rénovation, certains ont la capacité d'accueillir 50% d’habitants supplémentaires. Nous sommes prêts à accueillir la croissance là où il existe déjà un bon réseau de transports, c’est-à-dire, dans les zones construites, à condition de ne pas dénaturer les quartiers existants. Et, dans notre système démocratique, cela ne peut pas se faire sans l’approbation de la population"
         }
 
     @property
@@ -33,6 +35,18 @@ class News:
         if (self.article_metadata is None):
             self.init_news_metadata()
         return self.article_metadata["article_body"]
+
+    def get_system_recommendations(self):
+        #articles = search_engine.find_articles("accidents")
+        articles = [
+            {
+             "date" : "date",
+             "newspaper" : "newspaper",
+             "title" : "title",
+             "tags" : "termes en relation"
+         },
+        ]
+        return articles
 
 class Archive:
     def __init__(self, id):
