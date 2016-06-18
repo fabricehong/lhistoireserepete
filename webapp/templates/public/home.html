@@ -27,43 +27,47 @@
         <!--<iframe src="http://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare" width="90%" height="600"/>-->
      </div>
      <div class="col-xs-5">
-        <h3>Archives liés par le lectorat</h3>
-        <table>
-          <tr>
-            <td>
-              <h5>{{user_recommendations.date}}, {{user_recommendations.newspaper}}</h5>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <h4>{{user_recommendations.title}}</h4>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <h6>{{user_recommendations.comment}}</h6>
-            </td>
-          </tr>
-        </table>
+        <div class="user-recommendations">
+          <h3>Archives liés par le lectorat</h3>
+          <table>
+            <tr>
+              <td>
+                <h5>{{user_recommendations.date}}, {{user_recommendations.newspaper}}</h5>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h4>{{user_recommendations.title}}</h4>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h6>{{user_recommendations.comment}}</h6>
+              </td>
+            </tr>
+          </table>
+        </div><!-- .user-recommendations-->
 
-        <h3>Archives en relation</h3>
-        <table>
-          <tr>
-            <td>
-              <h5>{{system_recommendations.date}}, {{system_recommendations.newspaper}}</h5>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <h4>{{system_recommendations.title}}</h4>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <h6>{{system_recommendations.tags}}</h6>
-            </td>
-          </tr>
-        </table>
+        <div class="system-recommendations">
+          <h3>Archives en relation</h3>
+          <table>
+            <tr>
+              <td>
+                <h5>{{system_recommendations.date}}, {{system_recommendations.newspaper}}</h5>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h4>{{system_recommendations.title}}</h4>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h6>{{system_recommendations.tags}}</h6>
+              </td>
+            </tr>
+          </table>
+        </div><!-- .system-recommendations-->
       </div>
     </div><!-- /.row -->
 {% endblock %}
