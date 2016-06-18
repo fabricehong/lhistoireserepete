@@ -1,7 +1,7 @@
   {% if article.type=="news" %}
-    {% include "news.html" with article=article only %}
+    {% include "public/news.html" %}
   {% elif article.type=="archive" %}
-    {% include "archive.html" with article=article only %}
+    {% include "public/archive.html" %}
   {% else %}
     error
   {% endif %}

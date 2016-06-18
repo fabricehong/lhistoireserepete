@@ -76,9 +76,8 @@ def compare():
 
     article1 = articles.get_article(article1_id)
     article2 = articles.get_article(article2_id)
-    article1 = scrapeArticle(article1.url)
-    article2 = []#get_archive_from_id("JDG_1923_07_08", 10, "conference%20de%20lausanne")
-
+    #article1 = scrapeArticle(article1.url)
+    #article2 = []#get_archive_from_id("JDG_1923_07_08", 10, "conference%20de%20lausanne")
     links = [
         {
             "link" : "http://sdfsdf",
@@ -99,7 +98,7 @@ def compare():
         else:
             flash_errors(form)
     return render_template(
-        'public/home.html',
+        'public/compare.html',
         form=form,
         article1=article1,
         article2=article2
