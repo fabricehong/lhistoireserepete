@@ -22,4 +22,4 @@ def get_article(id):
     elif article_type=="archive":
         return Archive(id)
     else:
-        raise Exception("unknown type '%s'" % article_type)
+        return News("news$$%s" % id)
