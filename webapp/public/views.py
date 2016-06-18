@@ -24,13 +24,25 @@ def load_user(user_id):
 def home():
     #article = get_todays_news()
 
-    article = [
-        {
+    article = {
             "link" : "http://www.letempsarchives.ch/page/JDG_1923_07_08/10/conference%20de%20lausanne",
             "title" : "title",
             "archive_id" : "A34F"
-        }
-    ]
+    }
+
+    system_recommendations = {
+            "date" : "date",
+            "newspaper" : "newspaper",
+            "title" : "title",
+            "tags" : "termes en relation"
+    }
+
+    user_recommendations = {
+            "date" : "date",
+            "newspaper" : "newspaper",
+            "title" : "title",
+            "comment" : "comment"
+    }
 
     """Home page."""
     form = LoginForm(request.form)
@@ -46,7 +58,9 @@ def home():
     return render_template(
         'public/home.html',
         form=form,
-        article=article
+        article=article,
+        system_recommendations=system_recommendations,
+        user_recommendations=user_recommendations
     )
 
 def get_archive_from_id(id, page, keywords):

@@ -1,9 +1,13 @@
 
 {% extends "layout.html" %}
 
+{% block header %}
+    <h1>L'histoire se répète-t-elle ?</h1>
+{% endblock %}
+
 {% block article %}
     <div class="row">
-      <div class="col-lg-2">
+      <!--<div class="col-lg-2">
         <table>
           <tr>
             <td>
@@ -12,12 +16,12 @@
           </tr>
           <tr>
             <td>
-              Lien B
+              Lien
             </td>
           </tr>
         </table>
-      </div>
-      <div class="col-lg-8">
+      </div>-->
+      <div class="col-xs-6">
         ARTICLE :
         <table>
           <tr>
@@ -40,16 +44,41 @@
 
         <!--<iframe src="http://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare" width="90%" height="600"/>-->
      </div>
-      <div class="col-lg-2">
+     <div class="col-xs-5">
+        <h3>Archives liés par le lectorat</h3>
         <table>
           <tr>
             <td>
-              Lien 1
+              <h5>{{user_recommendations.date}}, {{user_recommendations.newspaper}}</h5>
             </td>
           </tr>
           <tr>
             <td>
-              Lien 2
+              <h4>{{user_recommendations.title}}</h4>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h6>{{user_recommendations.comment}}</h6>
+            </td>
+          </tr>
+        </table>
+
+        <h3>Archives en relation</h3>
+        <table>
+          <tr>
+            <td>
+              <h5>{{system_recommendations.date}}, {{system_recommendations.newspaper}}</h5>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h4>{{system_recommendations.title}}</h4>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h6>{{system_recommendations.tags}}</h6>
             </td>
           </tr>
         </table>
@@ -58,7 +87,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="body-content">
+<!--<div class="body-content">
   <table class="table">
     <tbody>
       <tr>
@@ -81,5 +110,5 @@
       </tr>
     </tbody>
 </table>
-</div>
+</div>-->
 {% endblock %}
