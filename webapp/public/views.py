@@ -5,12 +5,10 @@ from flask_login import login_required, login_user, logout_user, current_user
 
 from webapp.extensions import login_manager
 from webapp.public import articles
-from webapp.public import recommendations
 from webapp.public.forms import LoginForm
 from webapp.user.forms import RegisterForm, RelationForm
 from webapp.user.models import User, ArticleRelation
 from webapp.utils import flash_errors
-
 
 blueprint = Blueprint('public', __name__, static_folder='../static')
 
