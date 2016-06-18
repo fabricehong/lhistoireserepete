@@ -23,11 +23,8 @@ def load_user(user_id):
 def home():
     #article = get_todays_news()
 
-    article = {
-            "link" : "http://www.letempsarchives.ch/page/JDG_1923_07_08/10/conference%20de%20lausanne",
-            "title" : "title",
-            "archive_id" : "A34F"
-    }
+    articles.get_article("http://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare")
+    article = articles.get_article("http://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare")
 
     system_recommendations = {
             "date" : "date",
