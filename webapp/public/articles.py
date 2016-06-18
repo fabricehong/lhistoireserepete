@@ -10,7 +10,11 @@ class News:
         self.article_metadata = None
 
     def init_news_metadata(self):
-        self.article_metadata = scraper.scrape_article(self.url)
+        #self.article_metadata = scraper.scrape_article(self.url)
+        self.article_metadata = {
+            "title" : "Mon titre",
+            "subtitle" : "Dans le désert du Nouveau-Mexique, qui inaugura hier l’ère atomique, une communauté célèbre la nature en vivant dans des «Ea
+        }
 
     @property
     def title(self):
