@@ -30,7 +30,7 @@ def home():
 
     system_recommendations = get_system_recommendations(article)
 
-    user_recommendations = get_user_recommendations()
+    user_recommendations = get_user_recommendations(article)
 
     """Home page."""
     form = LoginForm(request.form)
@@ -62,15 +62,8 @@ def get_system_recommendations(article):
     #     },
     # ]
 
-def get_user_recommendations():
-    return [
-        {
-            "date" : "date",
-            "newspaper" : "newspaper",
-            "title" : "title",
-            "comment" : "comment"
-        },
-    ]
+def get_user_recommendations(article):
+    return articles.get_relations_by_id(article.id)
 
 def get_archive_from_id(id, page, keywords):
     return {

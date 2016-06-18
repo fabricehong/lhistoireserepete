@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from webapp.core import scraper
 from webapp.user.models import ArticleRelation
 
@@ -24,6 +25,7 @@ separator = "$$"
 class News:
     def __init__(self, id):
         split_index = id.index(separator)
+        self.id = id
         self.type = id[:split_index]
         self.url = id[split_index+2:]
         #self.url = "http://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare"
@@ -33,7 +35,7 @@ class News:
         #self.article_metadata = scraper.scrape_article(self.url)
         self.article_metadata = {
             "title" : "Mon titre",
-            "subtitle" : "Dans le désert du Nouveau-Mexique, qui inaugura hier l’ère atomique, une communauté célèbre la nature en vivant dans des «Ea
+            "subtitle" : "Dans le désert du Nouveau-Mexique, qui inaugura hier l’ère atomique, une communauté célèbre la nature en vivant dans des «Ea"
         }
 
     @property
@@ -57,6 +59,7 @@ class News:
 class Archive:
     def __init__(self, id):
         parts = id.split(separator)
+        self.id = id
         self.type = parts[0]
         self.url = "http://www.letempsarchives.ch/page/%s/%s/%s" % (parts[1], parts[2], parts[3])
 
