@@ -55,26 +55,44 @@ class News:
         return self.article_metadata["article_body"]
 
     def get_system_recommendations(self):
+        return [
+            Archive(id='archive$$JDG_1981_12_12$$7', metadata={
+                u'title': u"CONVENTIONS EN FAVEUR DE L'INDUSTRIE " \
+                           u"D'EXPORTATION La BNS n'accédera certainement pas à la requete des horlogers suisses",
+                u'meta_year_i': 1981,
+                u'meta_publisher_s': 'JDG',
+            })
+        ]
         articles = core_interface.get_archives_from_news(self)
-        return articles
+        print articles
+        ids = ["archive$$" + article[u'id'] for article in articles]
+        return [
+            get_article(
+                "archive$$" + article[u'doc_s'] + "$$" + str(article[u'page_i']),
+                article,
+            ) for article in articles]
 
     def get_user_recommendations(self):
         return get_relations_by_id(self.id)
 
 class Archive:
-    def __init__(self, id):
+    def __init__(self, id, metadata={u'title': 'Titre'}):
         parts = id.split(separator)
         self.id = id
         self.type = parts[0]
-        self.url = "http://www.letempsarchives.ch/page/%s/%s/%s" % (parts[1], parts[2], parts[3])
+        self.url = "http://www.letempsarchives.ch/page/%s/%s" % (parts[0], parts[1])
+        self.title = metadata[u'title']
 
-def get_article(id):
+        self.date = metadata[u'meta_year_i']
+        self.newspaper = metadata[u'meta_publisher_s']
+
+def get_article(id, metadata={}):
     parts = id.split(separator)
     article_type = parts[0]
 
     if article_type=="news":
         return News(id)
     elif article_type=="archive":
-        return Archive(id)
+        return Archive(id, metadata)
     else:
         return News("news$$%s" % id)
