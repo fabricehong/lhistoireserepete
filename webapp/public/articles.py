@@ -65,7 +65,8 @@ class News:
              "date" : "date",
              "newspaper" : "newspaper",
              "title" : "title",
-             "tags" : "termes en relation"
+             "tags" : "termes en relation",
+             "type": "news",
          },
         ]
         return articles

@@ -80,8 +80,8 @@ def compare():
         form=form,
         article1=article1,
         article2=article2,
-        system_recommendations=article2.get_system_recommendations(),  # TODO
-        user_recommendations=article2.get_system_recommendations(),  # TODO
+        system_recommendations=article2.get_system_recommendations(),
+        user_recommendations=article2.get_system_recommendations(),
     )
 
 
