@@ -28,9 +28,7 @@ def home():
     articles.get_article("http://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare")
     article = articles.get_article("http://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare")
 
-    system_recommendations = get_system_recommendations(article)
-
-    user_recommendations = get_user_recommendations(article)
+    user_recommendations = get_user_recommendations()
 
     """Home page."""
     form = LoginForm(request.form)
@@ -47,23 +45,9 @@ def home():
         'public/home.html',
         form=form,
         article=article,
-        system_recommendations=system_recommendations,
+        system_recommendations=article.get_system_recommendations(),
         user_recommendations=user_recommendations
     )
-
-def get_system_recommendations(article):
-    return recommendations.get_recommendations(article)
-    # [
-    #     {
-    #         "date" : "date",
-    #         "newspaper" : "newspaper",
-    #         "title" : "title",
-    #         "tags" : "termes en relation"
-    #     },
-    # ]
-
-def get_user_recommendations(article):
-    return articles.get_relations_by_id(article.id)
 
 def get_archive_from_id(id, page, keywords):
     return {
