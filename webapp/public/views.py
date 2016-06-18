@@ -74,7 +74,7 @@ def compare():
     #article1 = scrapeArticle(article1.url)
     #article2 = []#get_archive_from_id("JDG_1923_07_08", 10, "conference%20de%20lausanne")
     
-    system_recommendations = get_system_recommendations()
+    recommendations = article1.get_system_recommendations()
 
     user_recommendations = get_user_recommendations()
 
@@ -94,7 +94,7 @@ def compare():
         form=form,
         article1=article1,
         article2=article2,
-        system_recommendations=system_recommendations,
+        system_recommendations=recommendations,
         user_recommendations=user_recommendations
     )
 
