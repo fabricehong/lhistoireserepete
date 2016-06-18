@@ -1,4 +1,4 @@
-from webapp.scraperletemps import scraperletemps
+from webapp.core import scraper
 
 separator = "$$"
 class News:
@@ -10,7 +10,7 @@ class News:
         self.article_metadata = None
 
     def init_news_metadata(self):
-        self.article_metadata = scraperletemps.scrape_article(self.url)
+        self.article_metadata = scraper.scrape_article(self.url)
 
     @property
     def title(self):

@@ -1,10 +1,9 @@
-from webapp.arnaud import hackathon
-
+from webapp.core import search_engine
 
 def get_recommendations(article):
     if article.type=="news":
-        keywords = hackathon.get_keywords(article.title, article.subtitle, article.body)
-        articles = hackathon.find_articles(keywords)
+        keywords = search_engine.get_keywords(article.title, article.subtitle, article.body)
+        articles = search_engine.find_articles(keywords)
         return articles
     elif article.type=="archive":
         return None
