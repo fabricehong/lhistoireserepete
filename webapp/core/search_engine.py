@@ -8,8 +8,10 @@ import codecs
 from titles import scrape_title_sparql_from_solr_doc
 from scraper import get_todays_news
 
+
 def file_full_path(filename):
     return os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)
+
 
 # Trouver les keywords à partir d'un article input
 # TODO : fonction qui trouve les mots clés dans un article
@@ -33,15 +35,21 @@ def get_keywords(title, subtitle, article_body):
 
 
 # Trouver les articles dans lesquels les mots apparaissent
-def find_articles(key_words_input):
+def find_articles(key_words_input, n_articles):
     root_url = 'http://dhlabsrv8.epfl.ch:8983/solr/letemps_article/select?q='
-    url = (root_url + ' OR '.join(key_words_input)).replace(' ', '%20') + '&wt=json'
+    url = u"{root}{query}{parameters}".format(root=root_url,
+                                              query=' OR '.join(key_words_input).replace(' ', '%20'),
+                                              parameters='&wt=json&rows=' + str(n_articles))
     page = requests.get(url)
     json_page = page.json()
     response = json_page['response']
     docs = response['docs']
     for doc in docs:
-        doc['title'] = scrape_title_sparql_from_solr_doc(doc)
+        found_title = scrape_title_sparql_from_solr_doc(doc)
+        if found_title and found_title != 'Untitled Article':
+            doc['title'] = found_title
+        else:
+            doc['title'] = '# ' + ' '.join(doc['content_txt_fr'].split(' ')[0:5])
     return docs
 
 
@@ -87,12 +95,12 @@ if __name__ == '__main__':
     # article['article_body'] = u"Des dizaines de perquisitions nécessitant une «intervention immédiate» ont été menées dans la nuit de vendredi à samedi en Belgique dans le cadre d'un dossier de terrorisme, au moment où la protection de personnalités a été renforcée sur fond de menace de nouveaux attentats.«Les éléments recueillis dans le cadre de l'instruction nécessitaient d'intervenir immédiatement» explique le parquet fédéral qui centralise les enquêtes antiterroristes en Belgique.Les perquisitions se sont déroulées dans 16 communes principalement à Bruxelles mais aussi en Flandre et en Wallonie. Le parquet n'indique pas pourquoi il a agi si rapidement."
 
     article = get_todays_news()
-    key_words = get_keywords(article)
+    key_words = get_keywords(article['title'], article['subtitle'], article['article_body'])
 
     print(u'\nKey words deduced are :'.format(kw=key_words))
     for kw in key_words:
         print(kw)
-    articles = find_articles(key_words)
+    articles = find_articles(key_words, 14)
     print(u'\n{narticles} were found'.format(narticles=len(articles)))
     # for a in articles:
     #    print(a['content_txt_fr'][0:100])
