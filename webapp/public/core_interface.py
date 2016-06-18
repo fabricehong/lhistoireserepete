@@ -24,9 +24,9 @@ def get_archives_from_news(news):
          },
         ]
 
-    keywords = get_keywords_from_news(news)
-    archives = search_engine.find_articles(keywords, 10)
-    return archives
+    #keywords = get_keywords_from_news(news)
+    #archives = search_engine.find_articles(keywords, 10)
+    return mock_archives
 
 def get_keywords_from_news(news):
     keywords = search_engine.get_keywords(news.title, news.subtitle, news.body)
