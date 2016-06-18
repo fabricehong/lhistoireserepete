@@ -4,6 +4,7 @@ from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import login_required, login_user, logout_user
 
 from webapp.extensions import login_manager
+from webapp.public import articles
 from webapp.public.forms import LoginForm
 from webapp.scraperletemps.scraperletemps import get_todays_news, scrapeArticle
 from webapp.user.forms import RegisterForm
@@ -54,9 +55,15 @@ def get_archive_from_id(id, page, keywords):
     }
 
 @blueprint.route('/compare', methods=['GET'])
-def compare(source_id, destination_id):
-    article1 = scrapeArticle(source_id)
-    article2 = get_archive_from_id("JDG_1923_07_08", 10, "conference%20de%20lausanne")
+def compare():
+
+    article1_id = request.args.get('source_id')
+    article2_id = request.args.get('destination_id')
+
+    article1 = articles.get_article(article1_id)
+    article2 = articles.get_article(article2_id)
+    article1 = scrapeArticle(article1.url)
+    article2 = []#get_archive_from_id("JDG_1923_07_08", 10, "conference%20de%20lausanne")
 
     links = [
         {
