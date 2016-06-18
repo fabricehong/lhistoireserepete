@@ -1,0 +1,28 @@
+
+{% extends "layout.html" %}
+{% block content %}
+<div class="container-narrow">
+  <h1>Establish a new relation</h1>
+    <br/>
+    <form id="relationForm" class="form form-register" method="POST" action=""
+          role="form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <div class="form-group">
+            {{relation_form.id1.label}}
+            {{relation_form.id1(placeholder="123", class_="form-control")}}
+        </div>
+        <div class="form-group">
+            {{relation_form.id2.label}}
+            {{relation_form.id2(placeholder="123", class_="form-control")}}
+        </div>
+        <div class="form-group">
+            {{relation_form.description.label}}
+            {{relation_form.description(placeholder="These articles both mention...",
+            class_="form-control")}}
+        </div>
+        <p><input class="btn btn-default btn-submit" type="submit"
+                  value="Create association"></p>
+    </form>
+</div>
+{% endblock %}
+

@@ -68,13 +68,16 @@ class User(UserMixin, SurrogatePK, Model):
 class ArticleRelation(UserMixin, SurrogatePK, Model):
     """An article relation"""
 
-    __tablename__ = 'users'
-    article1_id = Column(db.String(80), unique=True, nullable=False)
-    article2_id = Column(db.String(80), unique=True, nullable=False)
+    __tablename__ = 'articlerelation'
 
-    def __init__(self, article1_id, article2_id, **kwargs):
+    article1_id = Column(db.String(255), unique=False, nullable=False)
+    article2_id = Column(db.String(255), unique=False, nullable=False)
+    description = Column(db.Text)
+
+    def __init__(self, article1_id, article2_id, description="", **kwargs):
         """Create instance."""
-        db.Model.__init__(self, article1_id=article1_id, article2_id=article2_id, **kwargs)
+        db.Model.__init__(self, article1_id=article1_id,
+                 article2_id=article2_id, description=description, **kwargs)
 
 
     def __repr__(self):

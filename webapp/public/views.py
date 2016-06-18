@@ -7,8 +7,8 @@ from webapp.extensions import login_manager
 from webapp.public import articles
 from webapp.public.forms import LoginForm
 from webapp.scraperletemps.scraperletemps import get_todays_news, scrape_article
-from webapp.user.forms import RegisterForm
-from webapp.user.models import User
+from webapp.user.forms import RegisterForm, RelationForm
+from webapp.user.models import User, ArticleRelation
 from webapp.utils import flash_errors
 
 blueprint = Blueprint('public', __name__, static_folder='../static')
@@ -114,6 +114,26 @@ def register():
         flash_errors(form)
     return render_template('public/register.html', form=form)
 
+
+@blueprint.route('/new_relation/', methods=['GET', 'POST'])
+def new_relation():
+    """Register new user."""
+    login_form = LoginForm(request.form)
+    relation_form = RelationForm(request.form, csrf_context=False)
+    if relation_form.validate_on_submit():
+        ArticleRelation.create(
+            article1_id=relation_form.id1.data,
+            article2_id=relation_form.id2.data,
+            description=relation_form.description.data,
+        )
+        return "New relation created: {} to {}: {}".format(
+            relation_form.id1.data, relation_form.id2.data,
+            relation_form.description.data)
+    else:
+        flash_errors(relation_form)
+    return render_template("public/newrelation.html",
+                           relation_form=relation_form,
+                           form=login_form)
 
 @blueprint.route('/about/')
 def about():
