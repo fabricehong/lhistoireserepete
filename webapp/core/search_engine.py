@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python3
+import os
 
 import requests
 from nltk.tokenize import WordPunctTokenizer
@@ -7,19 +8,20 @@ import codecs
 from titles import scrape_title_sparql_from_solr_doc
 from scraper import get_todays_news
 
+def file_full_path(filename):
+    return os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)
+
 # Trouver les keywords à partir d'un article input
 # TODO : fonction qui trouve les mots clés dans un article
-def get_keywords(input_article):
-    stop_words = codecs.open('stopwords_fr.txt', "r", "utf-8").read().split('\n')
+def get_keywords(title, subtitle, article_body):
+    path = file_full_path('stopwords_fr.txt')
+    stop_words = codecs.open(path, "r", "utf-8").read().split('\n')
     wpt = WordPunctTokenizer()
 
     def reduce_words(string_input):
         tokens = wpt.tokenize(string_input)
         return [t for t in tokens if t.lower() not in stop_words]
 
-    title = input_article['title']
-    subtitle = input_article['subtitle']
-    article_body = input_article['article_body']
     key_words_output = []
     if title:
         key_words_output = reduce_words(title)

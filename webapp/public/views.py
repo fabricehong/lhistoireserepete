@@ -5,10 +5,12 @@ from flask_login import login_required, login_user, logout_user
 
 from webapp.extensions import login_manager
 from webapp.public import articles
+from webapp.public import recommendations
 from webapp.public.forms import LoginForm
 from webapp.user.forms import RegisterForm
 from webapp.user.models import User
 from webapp.utils import flash_errors
+
 
 blueprint = Blueprint('public', __name__, static_folder='../static')
 
@@ -26,7 +28,7 @@ def home():
     articles.get_article("http://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare")
     article = articles.get_article("http://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare")
 
-    system_recommendations = get_system_recommendations()
+    system_recommendations = get_system_recommendations(article)
 
     user_recommendations = get_user_recommendations()
 
@@ -49,15 +51,16 @@ def home():
         user_recommendations=user_recommendations
     )
 
-def get_system_recommendations():
-    return [
-        {
-            "date" : "date",
-            "newspaper" : "newspaper",
-            "title" : "title",
-            "tags" : "termes en relation"
-        },
-    ]
+def get_system_recommendations(article):
+    return recommendations.get_recommendations(article)
+    # [
+    #     {
+    #         "date" : "date",
+    #         "newspaper" : "newspaper",
+    #         "title" : "title",
+    #         "tags" : "termes en relation"
+    #     },
+    # ]
 
 def get_user_recommendations():
     return [
