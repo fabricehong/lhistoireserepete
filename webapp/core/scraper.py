@@ -15,7 +15,16 @@ import re
 #################################################
 
 def get_todays_news():
-	return scrape_article("http://www.letemps.ch/sciences/2016/06/18/traversee-atlantique-bertrand-piccard")
+    import random
+    urls = ["http://www.letemps.ch/sciences/2016/06/18/traversee-atlantique-bertrand-piccard",
+            "http://www.letemps.ch/monde/2016/06/18/vaste-coup-filet-haute-tension-belgique",
+            "http://www.letemps.ch/economie/2016/06/17/presidents-grands-groupes-suisses-mieux-payes-monde",
+            "http://www.letemps.ch/economie/2016/06/17/suisse-va-reprendre-discussions-inde",
+            "http://www.letemps.ch/monde/2016/06/17/politique-migratoire-honteuse-europe-aura-plus-aucune-credibilite",
+            "http://www.letemps.ch/sport/2016/06/17/roumanie-albanie-stade-yverdon-euro",
+            "https://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare"]
+    url = random.choice(urls)
+    return scrape_article(url)
 
 
 # Scrape an article from Le Temps, starting from a URL
