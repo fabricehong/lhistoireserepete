@@ -5,7 +5,7 @@ from datetime import date
 from bs4 import BeautifulSoup
 import requests
 import re
-
+from random import randint
 
 # source_url = "http://www.letemps.ch/opinions/2016/06/15/fiscalite-entreprises-force-compromis"
 # source_url = "http://www.letemps.ch/sport/2016/06/17/suspension-federation-russe-athletisme-maintenue"
@@ -13,6 +13,25 @@ import re
 #################################################
 # ----------------- Functions ----------------- #
 #################################################
+
+def get_articles_en_continu():
+	urlencontinu = "http://www.letemps.ch/en-continu/feed"
+	sample_date = str(date.today())
+
+	response = requests.get(urlencontinu)
+	html = response.text
+	doc = BeautifulSoup(html)
+
+	# look for urls in the resulting doc 
+	regex = "(http://www.letemps.ch/\w+/\d{4}/\d{2}/\d{2}/[\w-]+)"
+	articles_urls = re.compile(regex).findall(doc.text) 
+
+	return articles_urls
+
+def get_random_article():
+	articles_urls = get_articles_en_continu()
+
+	return articles_urls[randint(0,len(articles_urls)-1)]
 
 def get_todays_news():
     import random

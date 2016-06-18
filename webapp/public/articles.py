@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from webapp.core import search_engine
+from webapp.public import core_interface
 
 separator = "$$"
 class News:
@@ -11,12 +12,7 @@ class News:
         self.article_metadata = None
 
     def init_news_metadata(self):
-        #self.article_metadata = scraper.scrape_article(self.url)
-        self.article_metadata = {
-            "title" : "Mon titre",
-            "subtitle" : "la police qui refuse de donner des précisions sur la nature de l'enquête",
-            "article_body" : "Après rénovation, certains ont la capacité d'accueillir 50% d’habitants supplémentaires. Nous sommes prêts à accueillir la croissance là où il existe déjà un bon réseau de transports, c’est-à-dire, dans les zones construites, à condition de ne pas dénaturer les quartiers existants. Et, dans notre système démocratique, cela ne peut pas se faire sans l’approbation de la population"
-        }
+        self.article_metadata = core_interface.get_news_metadata(self.url)
 
     @property
     def title(self):
@@ -37,15 +33,7 @@ class News:
         return self.article_metadata["article_body"]
 
     def get_system_recommendations(self):
-        #articles = search_engine.find_articles("accidents")
-        articles = [
-            {
-             "date" : "date",
-             "newspaper" : "newspaper",
-             "title" : "title",
-             "tags" : "termes en relation"
-         },
-        ]
+        articles = core_interface.get_archives_from_news(self)
         return articles
 
 class Archive:
