@@ -6,8 +6,9 @@
 }
 
 h1 {
+  padding: 50px 0 25px 0;
   font-family: "Playfair Display", "Times New Roman", Times, serif;
-  font-size: 60px;
+  font-size: 45px;
   font-weight: 400;
   font-style: normal;
   text-transform: uppercase;
@@ -31,37 +32,36 @@ h3 {
   font-weight: 400;
   font-style: normal;
   text-transform: uppercase;
-  letter-spacing: 1px;
   text-align: left;
   color: #b80021;
 }
 
 h4 {
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 500;
   font-style: normal;
-  line-height: 1.6;
+  line-height: 10px;
   text-align: left;
   color: #323232;
 }
 
 h5 {
   font-family: Trirong, "Times New Roman", Times, serif;
-  font-size: 19px;
+  font-size: 15px;
   font-weight: 400;
   font-style: normal;
-  line-height: 1.6;
+  line-height: 8px;
   text-align: left;
   color: #404040;
 }
 
 h6 {
   font-family: Trirong, "Times New Roman", Times, serif;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 400;
   font-style: italic;
-  line-height: 1.6;
+  line-height: 7px;
   text-align: left;
   color: #404040;
 }
@@ -80,6 +80,17 @@ h6 {
 	position: relative;
 	width: 95%;
 	height: 600px;
+}
+
+.user-recommendations {
+  margin-bottom: 45px;
+  padding: 1px 17px 12px 17px;
+  background-color: #f5f5f5;
+}
+
+.system-recommendations {
+  padding: 1px 17px 12px 17px;
+  background-color: #f5f5f5;
 }
 
 /* footer */
