@@ -44,6 +44,10 @@ def find_articles(key_words_input):
 # Rank articles using TF-IDF weights
 def rank_articles(input_article, query_result_articles):
 
+    def cosine_sim(text1, text2):
+        tfidf = vectorizer.fit_transform([text1, text2])
+        return (tfidf * tfidf.T).A[0, 1]
+
     # Keep only the article' full text
     article_list = [doc['content_txt_fr'] for doc in query_result_articles]
 
@@ -52,9 +56,7 @@ def rank_articles(input_article, query_result_articles):
     from sklearn.feature_extraction.text import TfidfVectorizer
     vectorizer = TfidfVectorizer(tokenizer=wpt.tokenize, ngram_range=range(1,3))
 
-    def cosine_sim(text1, text2):
-        tfidf = vectorizer.fit_transform([text1, text2])
-        return (tfidf * tfidf.T).A[0, 1]
+
 
     for query_result_article in article_list:
         query_result_article['score'] = cosine_sim(input_article, query_result_article)
