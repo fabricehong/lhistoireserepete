@@ -5,7 +5,7 @@ import requests
 from nltk.tokenize import WordPunctTokenizer
 import codecs
 from titles import scrape_title_sparql_from_solr_doc
-
+from scraper import get_todays_news
 
 # Trouver les keywords à partir d'un article input
 # TODO : fonction qui trouve les mots clés dans un article
@@ -73,18 +73,20 @@ def rank_articles(input_article, query_result_articles):
 
 if __name__ == '__main__':
 
-    article = {}
-    article['title'] = u"La suspension de la Fédération russe d'athlétisme est maintenue"
-    article['subtitle'] = u'Depuis une vingtaine d’années, les confrontations sportives entre la Suisse et la France sont le reflet des tensions croissantes entre les deux pays. Le match de football, dimanche à Lille (21h), n’échappe pas à la règle'
-    article['article_body'] = u'Sur Twitter, Pierre Ménès et Granit Xhaka ont déjà lancé le match. «Les Suisses n’ont aucun talent. Si, en tennis», a ironisé le chroniqueur français, connu pour ses avis tranchés et ses jugements à l’emporte-pièce. «Nous parlerons après le match», lui a répondu, toujours sur Twitter, le milieu de terrain de l’équipe de Suisse Granit Xhaka.'
+    # article = {}
+    # article['title'] = u"La suspension de la Fédération russe d'athlétisme est maintenue"
+    # article['subtitle'] = u'Depuis une vingtaine d’années, les confrontations sportives entre la Suisse et la France sont le reflet des tensions croissantes entre les deux pays. Le match de football, dimanche à Lille (21h), n’échappe pas à la règle'
+    # article['article_body'] = u'Sur Twitter, Pierre Ménès et Granit Xhaka ont déjà lancé le match. «Les Suisses n’ont aucun talent. Si, en tennis», a ironisé le chroniqueur français, connu pour ses avis tranchés et ses jugements à l’emporte-pièce. «Nous parlerons après le match», lui a répondu, toujours sur Twitter, le milieu de terrain de l’équipe de Suisse Granit Xhaka.'
+    #
+    #
+    # article['title'] = u'Vaste coup de filet et haute tension en Belgique'
+    # article['subtitle'] = u"152 boxes de garage ont été vérifiés, 40 personnes interpellées. «Sans incident», dit la police qui refuse de donner des précisions sur la nature de l'enquête, sinon que la situation nécessitait une «intervention immédiate»"
+    # article['article_body'] = u"Des dizaines de perquisitions nécessitant une «intervention immédiate» ont été menées dans la nuit de vendredi à samedi en Belgique dans le cadre d'un dossier de terrorisme, au moment où la protection de personnalités a été renforcée sur fond de menace de nouveaux attentats.«Les éléments recueillis dans le cadre de l'instruction nécessitaient d'intervenir immédiatement» explique le parquet fédéral qui centralise les enquêtes antiterroristes en Belgique.Les perquisitions se sont déroulées dans 16 communes principalement à Bruxelles mais aussi en Flandre et en Wallonie. Le parquet n'indique pas pourquoi il a agi si rapidement."
 
-
-    article['title'] = u'Vaste coup de filet et haute tension en Belgique'
-    article['subtitle'] = u"152 boxes de garage ont été vérifiés, 40 personnes interpellées. «Sans incident», dit la police qui refuse de donner des précisions sur la nature de l'enquête, sinon que la situation nécessitait une «intervention immédiate»"
-    article['article_body'] = u"Des dizaines de perquisitions nécessitant une «intervention immédiate» ont été menées dans la nuit de vendredi à samedi en Belgique dans le cadre d'un dossier de terrorisme, au moment où la protection de personnalités a été renforcée sur fond de menace de nouveaux attentats.«Les éléments recueillis dans le cadre de l'instruction nécessitaient d'intervenir immédiatement» explique le parquet fédéral qui centralise les enquêtes antiterroristes en Belgique.Les perquisitions se sont déroulées dans 16 communes principalement à Bruxelles mais aussi en Flandre et en Wallonie. Le parquet n'indique pas pourquoi il a agi si rapidement."
-
-
+    article = get_todays_news()
+    print(type(article))
     key_words = get_keywords(article)
+
     print(u'\nKey words deduced are :'.format(kw=key_words))
     for kw in key_words:
         print(kw)
