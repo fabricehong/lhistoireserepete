@@ -1,3 +1,23 @@
+from webapp.user.models import ArticleRelation
+
+
+def get_relations_by_id(id):
+    """ Returns a list of all associated News/Archive IDs """
+
+    # id1 -> id2 relations:
+    relations = ArticleRelation.query.filter_by(article1_id=id).all()
+    print "relations 1", relations
+    ids = set(relation.article2_id for relation in relations)
+
+    # id2 -> id1 relations:
+    relations = ArticleRelation.query.filter_by(article2_id=id).all()
+    print "relations 2", relations
+    ids = ids.union(relation.article1_id for relation in relations)
+
+    print ids
+
+    return [get_article(id) for id in ids]
+
 
 separator = "$$"
 class News:

@@ -66,11 +66,13 @@ class User(UserMixin, SurrogatePK, Model):
 
 
 class ArticleRelation(UserMixin, SurrogatePK, Model):
-    """An article relation"""
+    """An article relation. """
 
     __tablename__ = 'articlerelation'
 
+    #: this is an article from le temps
     article1_id = Column(db.String(255), unique=False, nullable=False)
+    #: this is an article from the archives!
     article2_id = Column(db.String(255), unique=False, nullable=False)
     description = Column(db.Text)
     user = Column(db.String(255), unique=False, nullable=False)
