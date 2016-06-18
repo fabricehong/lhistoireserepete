@@ -73,6 +73,7 @@ class ArticleRelation(UserMixin, SurrogatePK, Model):
     article1_id = Column(db.String(255), unique=False, nullable=False)
     article2_id = Column(db.String(255), unique=False, nullable=False)
     description = Column(db.Text)
+    user = Column(db.String(255), unique=False, nullable=False)
 
     def __init__(self, article1_id, article2_id, description="", **kwargs):
         """Create instance."""

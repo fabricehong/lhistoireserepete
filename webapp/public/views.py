@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Public section, including homepage and signup."""
 from flask import Blueprint, flash, redirect, render_template, request, url_for
-from flask_login import login_required, login_user, logout_user
+from flask_login import login_required, login_user, logout_user, current_user
 
 from webapp.extensions import login_manager
 from webapp.public import articles
@@ -62,7 +62,7 @@ def compare():
 
     article1 = articles.get_article(article1_id)
     article2 = articles.get_article(article2_id)
-    article1 = scrapeArticle(article1.url)
+    article1 = scrape_article(article1.url)
     article2 = []#get_archive_from_id("JDG_1923_07_08", 10, "conference%20de%20lausanne")
 
     links = [
@@ -116,6 +116,7 @@ def register():
 
 
 @blueprint.route('/new_relation/', methods=['GET', 'POST'])
+@login_required
 def new_relation():
     """Register new user."""
     login_form = LoginForm(request.form)
@@ -125,6 +126,7 @@ def new_relation():
             article1_id=relation_form.id1.data,
             article2_id=relation_form.id2.data,
             description=relation_form.description.data,
+            user=current_user.get_id(),
         )
         return "New relation created: {} to {}: {}".format(
             relation_form.id1.data, relation_form.id2.data,
