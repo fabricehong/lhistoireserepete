@@ -46,7 +46,7 @@ def scrape_title_sparql(journal, date, articlesubid):
 
     r = requests.get(article_url)
 
-    bs = BeautifulSoup(r.text)
+    bs = BeautifulSoup(r.text, "lxml")
 
     try:
         title = bs.find('literal').text

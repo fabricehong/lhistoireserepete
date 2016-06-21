@@ -5,7 +5,7 @@ from datetime import date
 from bs4 import BeautifulSoup
 import requests
 import re
-
+from random import randint
 
 # source_url = "http://www.letemps.ch/opinions/2016/06/15/fiscalite-entreprises-force-compromis"
 # source_url = "http://www.letemps.ch/sport/2016/06/17/suspension-federation-russe-athletisme-maintenue"
@@ -14,8 +14,36 @@ import re
 # ----------------- Functions ----------------- #
 #################################################
 
+def get_articles_en_continu():
+	urlencontinu = "http://www.letemps.ch/en-continu/feed"
+	sample_date = str(date.today())
+
+	response = requests.get(urlencontinu)
+	html = response.text
+	doc = BeautifulSoup(html)
+
+	# look for urls in the resulting doc 
+	regex = "(http://www.letemps.ch/\w+/\d{4}/\d{2}/\d{2}/[\w-]+)"
+	articles_urls = re.compile(regex).findall(doc.text) 
+
+	return articles_urls
+
+def get_random_article():
+	articles_urls = get_articles_en_continu()
+
+	return articles_urls[randint(0,len(articles_urls)-1)]
+
 def get_todays_news():
-	return scrape_article("http://www.letemps.ch/sciences/2016/06/18/traversee-atlantique-bertrand-piccard")
+    import random
+    urls = ["http://www.letemps.ch/sciences/2016/06/18/traversee-atlantique-bertrand-piccard",
+            "http://www.letemps.ch/monde/2016/06/18/vaste-coup-filet-haute-tension-belgique",
+            "http://www.letemps.ch/economie/2016/06/17/presidents-grands-groupes-suisses-mieux-payes-monde",
+            "http://www.letemps.ch/economie/2016/06/17/suisse-va-reprendre-discussions-inde",
+            "http://www.letemps.ch/monde/2016/06/17/politique-migratoire-honteuse-europe-aura-plus-aucune-credibilite",
+            "http://www.letemps.ch/sport/2016/06/17/roumanie-albanie-stade-yverdon-euro",
+            "https://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare"]
+    url = random.choice(urls)
+    return scrape_article(url)
 
 
 # Scrape an article from Le Temps, starting from a URL

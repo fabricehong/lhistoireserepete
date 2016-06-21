@@ -5,27 +5,41 @@
     <h1>L'histoire se répète-t-elle ?</h1>
 {% endblock %}
 
-<div class="fil-ariane">
-</div>
-
 {% block article %}
+<div class="fil-ariane"><p><img src="http://www.enalto.fr/assets/left-arrow-ec6d586fe9b99a95159a2e097410a357ef04090ac84efce287da7fa03d48eda8.png" style="width:20px"/></p></div>
     <div class="row article-container">
-      <div class="col-xs-6">
-        <div> <!-- article 1-->
-            {% with article=article1 %}
-            {% include "public/article.html" %}
-            {% endwith %}
+        <div class="col-xs-7 left-column">
+            <div class="reviewed-article">
+                <div> <!-- article 1-->
+                    {% with article=article1 %}
+                    {% include "public/article.html" %}
+                    {% endwith %}
+                </div>
+                <div> <!-- article 1-->
+                    {% with article=article2 %}
+                    {% include "public/article.html" %}
+                    {% endwith %}
+                </div>
+            </div>
+            <div class="comments">
+                <p>Voyez-vous un lien entre cet article et l'article précédent ?</p>
+                <form action="">
+                    <input type="radio" name="connexion" value="yes"> Oui<br>
+                    <input type="radio" name="connexion" value="no"> Non<br>
+                </form>
+            </div>
+            <div class="relation">
+                <p>Sur quels termes liez-vous ces deux articles ? </p>
+                <form class="tags" action="demo_form.asp">
+                    <input type="text" name="tags" size="35"><br>
+                    <!--<input type="submit" value="Submit">-->
+                </form>
+            </div>
         </div>
-        <div> <!-- article 1-->
-            {% with article=article2 %}
-            {% include "public/article.html" %}
-            {% endwith %}
-        </div>
-    </div>
 
     <div class="col-xs-5">
         <div class="user-recommendations">
-          <h3>Archives liés par le lectorat</h3>
+          <h3>Articles liés par le lectorat</h3>
           <table>
             <tr>
               <td>
@@ -70,7 +84,5 @@
     </div><!-- /.row -->
 {% endblock %}
 
-
 {% block content %}
-
 {% endblock %}
