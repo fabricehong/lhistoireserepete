@@ -1,7 +1,15 @@
-  {% if article.type=="news" %}
-    {% include "public/news.html" %}
-  {% elif article.type=="archive" %}
-    {% include "public/archive.html" %}
-  {% else %}
-    error
-  {% endif %}
+{#  {% if article.type=="news" %}#}
+{#    {% include "public/news.html" %}#}
+{#  {% elif article.type=="archive" %}#}
+{#    {% include "public/archive.html" %}#}
+{#  {% else %}#}
+{#    error#}
+{#  {% endif %}#}
+
+<table>
+    <tr>
+        <td>
+            <iframe src="{{article.url}}" id="article-iframe"/></iframe>
+        </td>
+    </tr>
+</table>

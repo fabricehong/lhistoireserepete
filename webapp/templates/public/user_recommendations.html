@@ -1,0 +1,22 @@
+<div class="user-recommendations">
+    <h3>Articles liés par le lectorat</h3>
+    {% for recommendation in user_recommendations %}
+        <table>
+            <tr>
+                <td>
+                    <h5>{{recommendation.date}}, {{recommendation.newspaper}}</h5>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h4><a href="/compare?source_id={{ article.id }}&destination_id={{ recommendation.id }}">{{recommendation.title}}</a></h4>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h6>{{recommendation.tags}}</h6>
+                </td>
+            </tr>
+        </table>
+    {% endfor %}
+</div><!-- .system-recommendations-->

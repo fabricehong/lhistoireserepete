@@ -98,5 +98,3 @@ if __name__ == '__main__':
                                                                 subtitle=article['subtitle'],
                                                                 article_body=article['article_body'])
     rank_articles(article_input, articles)
-
-

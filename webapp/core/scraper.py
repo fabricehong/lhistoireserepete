@@ -92,7 +92,7 @@ def scrape_article(source_url):
         da = article_info.findAll('b')
         themes = []
         for d in da:
-            themes.append(d)
+            themes.append(d.string)
     except:
         themes = []
 
@@ -123,3 +123,4 @@ def scrape_article(source_url):
 #################################################
 # ------------------ Script ------------------- #
 #################################################
+
