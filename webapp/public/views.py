@@ -60,7 +60,7 @@ def compare():
     article2 = articles.get_article(article2_id)
     #article1 = scrapeArticle(article1.url)
     #article2 = []#get_archive_from_id("JDG_1923_07_08", 10, "conference%20de%20lausanne")
-    
+
 
     """Home page."""
     form = LoginForm(request.form)

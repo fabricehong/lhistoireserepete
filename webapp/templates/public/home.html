@@ -7,14 +7,14 @@
 
 {% block article %}
     <div class="row article-container">
-      <div class="col-xs-6">
+      <div class="col-xs-7 left-column">
       {% include "public/article.html" %}
 
         <!--<iframe src="http://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare" width="90%" height="600"/>-->
      </div>
      <div class="col-xs-5">
         <div class="user-recommendations">
-          <h3>Archives liés par le lectorat</h3>
+          <h3>Articles liés par le lectorat</h3>
           {% for recommendation in user_recommendations if recommendation.type == "news" %}
           <table>
             <tr>
