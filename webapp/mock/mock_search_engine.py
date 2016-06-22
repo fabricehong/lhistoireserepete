@@ -2,6 +2,7 @@
 
 import os
 import json
+import random
 
 BASEDIR = os.path.abspath(os.path.dirname(__file__))
 
@@ -11,6 +12,26 @@ def find_articles():
     with open(os.path.join(BASEDIR, 'archive_recommendations.json'), 'r') as fo:
         archives = json.load(fo)
     return archives
+
+def find_articles_by_ids(ids):
+    """ Return a previoulsy acquired list of articles.
+
+    ID is the Solr archive ID, not webapp ID. If ID doesn't match in the mock
+    database, return a random article instead.
+    """
+
+    with open(os.path.join(BASEDIR, 'archive_recommendations.json'), 'r') as fo:
+        archives = json.load(fo)
+
+    id_lookup = dict((entry['id'], entry) for entry in archives)
+
+    metadata = []
+    for id in ids:
+        if id in id_lookup:
+            metadata.append(id_lookup[id])
+        else:
+            metadata.append(random.choice(archives))
+    return metadata
 
 
 def get_news():
@@ -29,5 +50,4 @@ def get_news_by_url(url):
     if url in url_lookup.keys():
         return url_lookup[url]
     else:
-        import random
         return random.choice(news)

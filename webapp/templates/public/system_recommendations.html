@@ -9,7 +9,7 @@
             </tr>
             <tr>
                 <td>
-                    <h4><a href="/compare?source_id={{ article.id }}&destination_id={{ recommendation.id }}">{{recommendation.title}}</a></h4>
+                    <h4><a href="/compare?source_id={{ article.id | urlencode }}&destination_id={{ recommendation.id | urlencode }}">{{recommendation.title}}</a></h4>
                 </td>
             </tr>
             <tr>
