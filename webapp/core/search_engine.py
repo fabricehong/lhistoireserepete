@@ -18,6 +18,7 @@ def file_full_path(filename):
 def get_keywords(title, subtitle, article_body):
     path = file_full_path('stopwords_fr.txt')
     stop_words = codecs.open(path, "r", "utf-8").read().split('\n')
+
     wpt = WordPunctTokenizer()
 
     def reduce_words(string_input):
@@ -40,6 +41,40 @@ def find_articles(key_words_input, n_articles):
     url = u"{root}{query}{parameters}".format(root=root_url,
                                               query=' OR '.join(key_words_input).replace(' ', '%20'),
                                               parameters='&wt=json&rows=' + str(n_articles))
+    page = requests.get(url)
+    json_page = page.json()
+    response = json_page['response']
+    docs = response['docs']
+    for doc in docs:
+        found_title = scrape_title_sparql_from_solr_doc(doc)
+        if found_title and found_title != 'Untitled Article':
+            doc['title'] = found_title
+        else:
+            doc['title'] = '# ' + ' '.join(doc['content_txt_fr'].split(' ')[0:5])
+    return docs
+
+def find_articles_by_id(ids):
+    """
+    :arg list ids: list of articles IDs, as found in the 'id' metadata field.
+    :return: list of article metadata
+
+    .. warning::
+
+        The ID used here corresponds to the document id used in Solr, not the
+        webapp id.
+
+    """
+
+    if type(ids) == str:
+        ids = [ids]
+
+    root_url = 'http://dhlabsrv8.epfl.ch:8983/solr/letemps_article/select?q=*%3A*'
+    url = u"{root}&fq=id:({query}){parameters}".format(
+        root=root_url,
+        query='+OR+'.join(ids).replace('#', '%23'),
+        parameters='&wt=json'
+    )
+
     page = requests.get(url)
     json_page = page.json()
     response = json_page['response']
@@ -82,7 +117,6 @@ def rank_articles(input_article, query_result_articles):
     return sorted(query_result_articles, key=lambda x: x['score'], reverse=True)
 
 if __name__ == '__main__':
-
     article = get_todays_news()
     key_words = get_keywords(article['title'], article['subtitle'], article['article_body'])
     print(u"\n\n\n\n\n")
