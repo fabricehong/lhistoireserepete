@@ -35,7 +35,7 @@
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                     <input type="hidden" name="id1" value="{{ article1.id }}"/>
                     <input type="hidden" name="id2" value="{{ article2.id }}"/>
-                    {% if not current_user %}
+                    {% if current_user.username %}
                         <div class="form-group">
                             {{relation_form.description(placeholder="Ces deux articles mentionnent...", class_="form-control")}}
                         </div>
