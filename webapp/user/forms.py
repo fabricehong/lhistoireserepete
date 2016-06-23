@@ -47,7 +47,7 @@ class RelationForm(Form):
                            validators=[DataRequired(), Length(min=3, max=50)])
     id2 = StringField('id2',
                         validators=[DataRequired(), Length(min=3, max=50)])
-    description = TextAreaField('description')
+    description = StringField('description')
 
     def __init__(self, *args, **kwargs):
         """Create instance."""

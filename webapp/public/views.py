@@ -63,19 +63,21 @@ def compare():
 
 
     """Home page."""
-    form = LoginForm(request.form)
+    login_form = LoginForm(request.form)
+    relation_form = RelationForm(request.form, csrf_context=False)
     # Handle logging in
     if request.method == 'POST':
-        if form.validate_on_submit():
-            login_user(form.user)
+        if login_form.validate_on_submit():
+            login_user(login_form.user)
             flash('You are logged in.', 'success')
             redirect_url = request.args.get('next') or url_for('user.members')
             return redirect(redirect_url)
         else:
-            flash_errors(form)
+            flash_errors(login_form)
     return render_template(
         'public/compare.html',
-        form=form,
+        form=login_form,
+        relation_form=relation_form,
         article1=article1,
         article2=article2,
         system_recommendations=article2.get_system_recommendations(),

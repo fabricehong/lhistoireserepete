@@ -21,18 +21,36 @@
                     {% endwith %}
                 </div>
             </div>
-            <div class="comments">
-                <p>Voyez-vous un lien entre cet article et l'article précédent ?</p>
-                <form action="">
-                    <input type="radio" name="connexion" value="yes"> Oui<br>
-                    <input type="radio" name="connexion" value="no"> Non<br>
-                </form>
-            </div>
+{#            <div class="comments">#}
+{#                <form action="">#}
+{#                    <input type="radio" name="connexion" value="yes"> Oui<br>#}
+{#                    <input type="radio" name="connexion" value="no"> Non<br>#}
+{#                </form>#}
+{#            </div>#}
             <div class="relation">
-                <p>Sur quels termes liez-vous ces deux articles ? </p>
-                <form class="tags" action="demo_form.asp">
-                    <input type="text" name="tags" size="35"><br>
-                    <!--<input type="submit" value="Submit">-->
+                <p>Voyez-vous un lien entre cet article et l'article précédent ?</p>
+                <form id="relationForm" class="tags form form-register"
+                      method="POST" action="/new_relation/"
+                      role="form">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <input type="hidden" name="id1" value="{{ article1.id }}"/>
+                    <input type="hidden" name="id2" value="{{ article2.id }}"/>
+                    {% if not current_user %}
+                        <div class="form-group">
+                            {{relation_form.description(placeholder="Ces deux articles mentionnent...", class_="form-control")}}
+                        </div>
+                        <p><input class="btn btn-default btn-submit" type="submit"
+                                  value="Create association"></p>
+                    {% else %}
+                        <div class="form-group" disabled="disabled">
+                            {{relation_form.description(placeholder="Ces deux articles mentionnent...", class_="form-control")}}
+                        </div>
+                        <b>Veuillez vous identifier pour créer une
+                            recommendation!</b>
+                        <p><input class="btn btn-default btn-submit"
+                                  type="submit" disabled="disabled"
+                                  value="Create association"></p>
+                    {% endif %}
                 </form>
             </div>
         </div>
@@ -56,19 +74,6 @@
 <div class="container-narrow">
     <h1>Establish a new relation</h1>
     <br/>
-    <form id="relationForm" class="form form-register" method="POST" action=""
-          role="form">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-        <input type="hidden" name="id1" value="{{ article1.id }}"/>
-        <input type="hidden" name="id2" value="{{ article2.id }}"/>
-        <div class="form-group">
-            {{relation_form.description.label}}
-            {{relation_form.description(placeholder="These articles both mention...",
-            class_="form-control")}}
-        </div>
-        <p><input class="btn btn-default btn-submit" type="submit"
-                  value="Create association"></p>
-    </form>
 </div>
 -->
 
