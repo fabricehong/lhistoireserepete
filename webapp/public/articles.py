@@ -133,6 +133,7 @@ class Archive:
         self.title = ''
         self.date = ''
         self.newspaper = ''
+        self.body = ''
         self.metadata = None
 
     def init_metadata(self):
@@ -143,6 +144,7 @@ class Archive:
         self.title = metadata[u'title']
         self.date = metadata[u'meta_year_i']
         self.newspaper = metadata[u'meta_publisher_s']
+        self.body = metadata[u'content_txt_fr']
         self.metadata = metadata
 
     def populate_from_solr(self):

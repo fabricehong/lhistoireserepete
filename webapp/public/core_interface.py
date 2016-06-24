@@ -31,11 +31,10 @@ def get_archives_from_archive(archive):
     if MOCK:
         return mock_search_engine.find_articles()
 
-    # TODO!
-    # - fetch metadata
-    # - extract keywords
-    # - search_engine.find_articles(keywords)
-    return []
+    if archive.metadata is None:
+        archive.populate_from_solr()
+    keywords = search_engine.get_keywords(archive.title, '', archive.body)
+    return search_engine.find_articles(keywords, 10)
 
 def get_keywords_from_news(news):
     keywords = search_engine.get_keywords(news.title, news.subtitle, news.body)
