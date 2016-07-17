@@ -33,7 +33,7 @@ def home():
         if form.validate_on_submit():
             login_user(form.user)
             flash('You are logged in.', 'success')
-            redirect_url = request.args.get('next') or url_for('user.members')
+            redirect_url = request.args.get('next') or url_for('public.home')
             return redirect(redirect_url)
         else:
             flash_errors(form)
@@ -99,11 +99,15 @@ def logout():
 def register():
     """Register new user."""
     form = RegisterForm(request.form, csrf_enabled=False)
+    print "Received request"
     if form.validate_on_submit():
+        print "Validated form"
         User.create(username=form.username.data, email=form.email.data, password=form.password.data, active=True)
+        print "Created user"
         flash('Thank you for registering. You can now log in.', 'success')
         return redirect(url_for('public.home'))
     else:
+        print "Error validating"
         flash_errors(form)
     return render_template('public/register.html', form=form)
 
