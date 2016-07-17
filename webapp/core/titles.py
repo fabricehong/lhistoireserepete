@@ -13,11 +13,27 @@ def scrape_title_sparql_from_solr_doc(doc):
     article_id = get_article_id_from_solr_doc(doc)
     return scrape_title_sparql(article_id["journal"], article_id["date"], article_id["articlesubid"])
 
-def get_archive_title(id):
+def get_archive_title(doc):
+    """
+    :arg dict doc: Archive metadata as returned by Solr
+
+    :return: title as string, or None if not found
+    """
     # mongodb://hack2016:hack2016@ds011442.mlab.com:11442/archives
     db = mongo_client.archives
     titles_collection = db.titles
-    return titles_collection.find_one({'id': id})
+
+    title_id = '{}_{:02d}-{:02d}-{}_{}'.format(
+        doc['meta_publisher_s'],
+        doc['meta_day_i'],
+        doc['meta_month_i'],
+        doc['meta_year_i'],
+        doc['ar_s'],
+    )
+    match = titles_collection.find_one({'id': title_id})
+    if match is not None:
+        return match['title']
+    return None
 
 def get_article_id_from_solr_doc(doc):
     temp = doc["doc_s"].split("_")

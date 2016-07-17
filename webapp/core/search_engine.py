@@ -47,7 +47,7 @@ def find_archives(key_words_input, n_articles):
     docs = response['docs']
     for doc in docs:
         #found_title = titlescrape_title_sparql_from_solr_doc(doc)
-        found_title = titles.get_archive_title(doc['id'])
+        found_title = titles.get_archive_title(doc)
         if found_title and found_title != 'Untitled Article':
             doc['title'] = found_title
         else:
@@ -81,8 +81,8 @@ def find_archives_by_id(ids):
     response = json_page['response']
     docs = response['docs']
     for doc in docs:
-        found_title = titles.get_archive_title(doc['id'])
-        if found_title and found_title != 'Untitled Article':
+        found_title = titles.get_archive_title(doc)
+        if found_title is not None and found_title != 'Untitled Article':
             doc['title'] = found_title
         else:
             doc['title'] = '# ' + ' '.join(doc['content_txt_fr'].split(' ')[0:5])
