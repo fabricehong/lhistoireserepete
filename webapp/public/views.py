@@ -23,8 +23,8 @@ def load_user(user_id):
 def home():
     #article = get_todays_news()
 
-    articles.get_article("http://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare")
-    article = articles.get_article("http://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare")
+    #articles.get_article("http://www.letemps.ch/economie/2016/06/16/bns-ne-croit-brexit-s-y-prepare")
+    article = articles.get_article("http://www.letemps.ch/sciences/2016/06/18/traversee-atlantique-bertrand-piccard")
 
     user_recommendations = get_user_recommendations()
 
