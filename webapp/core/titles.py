@@ -7,6 +7,8 @@ from bs4 import BeautifulSoup
 
 
 mongo_client = MongoClient('mongodb://hack2016:hack2016@ds011442.mlab.com:11442/archives')
+db = mongo_client.archives
+titles_collection = db.titles
 #mongo_client = MongoClient('mongodb://hack2016:hack2016@ds011442.mlab.com:11442/archives')
 
 def scrape_title_sparql_from_solr_doc(doc):
@@ -15,9 +17,8 @@ def scrape_title_sparql_from_solr_doc(doc):
 
 def get_archive_title(id):
     # mongodb://hack2016:hack2016@ds011442.mlab.com:11442/archives
-    db = mongo_client.archives
-    titles_collection = db.titles
-    return titles_collection.find_one({'id': id})
+    archive = titles_collection.find_one({'id': id})
+    return archive
 
 def get_article_id_from_solr_doc(doc):
     temp = doc["doc_s"].split("_")
@@ -63,3 +64,5 @@ def scrape_title_sparql(journal, date, articlesubid):
         title = ''
 
     return title
+
+get_archive_title('JDG_1897_10_08#2#Ar00213')

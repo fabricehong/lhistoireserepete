@@ -10,13 +10,11 @@ sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython
 ```
 
 ## Lancer le serveur
-
 ```
 python manage.py runserver
 ```
 
 activate mock mode:
-
 ```
 . /mock.sh
 ```
