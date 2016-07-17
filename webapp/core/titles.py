@@ -7,6 +7,8 @@ from bs4 import BeautifulSoup
 
 
 mongo_client = MongoClient('mongodb://hack2016:hack2016@ds011442.mlab.com:11442/archives')
+db = mongo_client.archives
+titles_collection = db.titles
 #mongo_client = MongoClient('mongodb://hack2016:hack2016@ds011442.mlab.com:11442/archives')
 
 def scrape_title_sparql_from_solr_doc(doc):

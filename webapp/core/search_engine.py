@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python3
 import os
+import urllib
 
 import requests
 from nltk.tokenize import WordPunctTokenizer
@@ -39,7 +40,7 @@ def get_keywords(title, subtitle, article_body):
 def find_archives(key_words_input, n_articles):
     root_url = 'http://dhlabsrv8.epfl.ch:8983/solr/letemps_article/select?q='
     url = u"{root}{query}{parameters}".format(root=root_url,
-                                              query=' OR '.join(key_words_input).replace(' ', '%20'),
+                                              query=urllib.quote(' OR '.join(key_words_input).encode('UTF-8')),
                                               parameters='&wt=json&rows=' + str(n_articles))
     page = requests.get(url)
     json_page = page.json()
