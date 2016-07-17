@@ -1,5 +1,11 @@
 # lhistoireserepete
 
+## installer les dependances
+pip install -r requirements/dev.txt
+
+## Lancer le serveur
+python manage.py runserver
+
 exemple ids:
 
 pour news:
