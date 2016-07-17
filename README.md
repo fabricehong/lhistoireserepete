@@ -4,7 +4,16 @@
 pip install -r requirements/dev.txt
 
 ## Lancer le serveur
+
+```
 python manage.py runserver
+```
+
+activate mock mode:
+
+```
+. /mock.sh
+```
 
 exemple ids:
 
@@ -28,3 +37,4 @@ Pour se connecter depuis l'outil ligne de commande:
 
   mongo ds011442.mlab.com:11442/archives -u hack2016 -p hack2016
   
+  collection : titles
