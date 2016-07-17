@@ -125,6 +125,11 @@ def new_relation():
             description=relation_form.description.data,
             user=current_user.get_id(),
         )
+        return redirect(url_for(
+            "public.compare",
+            source_id=relation_form.id1.data,
+            destination_id=relation_form.id2.data,
+        ))
         return "New relation created: {} to {}: {}".format(
             relation_form.id1.data, relation_form.id2.data,
             relation_form.description.data)
