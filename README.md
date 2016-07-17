@@ -23,3 +23,8 @@ http://127.0.0.1:5000/compare?source_id=news$$http://www.letempsarchives.ch/page
 Pour remplacer le serveur sparql, on héberge temporairement la liste de titres d'archives dans une base de donnée mongodb à l'adresse suivante:
 
 mongodb://hack2016:hack2016@ds011442.mlab.com:11442/archives
+
+Pour se connecter depuis l'outil ligne de commande:
+
+  mongo ds011442.mlab.com:11442/archives -u hack2016 -p hack2016
+  
