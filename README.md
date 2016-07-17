@@ -1,7 +1,13 @@
 # lhistoireserepete
 
 ## installer les dependances
+```
 pip install -r requirements/dev.txt
+```
+
+```
+sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose
+```
 
 ## Lancer le serveur
 

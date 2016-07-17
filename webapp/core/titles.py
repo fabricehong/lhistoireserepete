@@ -13,11 +13,11 @@ def scrape_title_sparql_from_solr_doc(doc):
     article_id = get_article_id_from_solr_doc(doc)
     return scrape_title_sparql(article_id["journal"], article_id["date"], article_id["articlesubid"])
 
-def get_title_from_mongo_db(doc):
+def get_archive_title(id):
     # mongodb://hack2016:hack2016@ds011442.mlab.com:11442/archives
     db = mongo_client.archives
     titles_collection = db.titles
-    return titles_collection.find_one({'id': doc['id']})
+    return titles_collection.find_one({'id': id})
 
 def get_article_id_from_solr_doc(doc):
     temp = doc["doc_s"].split("_")
@@ -63,6 +63,3 @@ def scrape_title_sparql(journal, date, articlesubid):
         title = ''
 
     return title
-
-doc = {'id' : 'JDG_01-01-1899_Ar00110'}
-print(get_title_from_mongo_db(doc))

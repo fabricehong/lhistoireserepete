@@ -7,7 +7,7 @@ import random
 BASEDIR = os.path.abspath(os.path.dirname(__file__))
 
 
-def find_articles():
+def find_archives():
     """ Return a previously acquired dump from the search engine """
     with open(os.path.join(BASEDIR, 'archive_recommendations.json'), 'r') as fo:
         archives = json.load(fo)

@@ -5,8 +5,8 @@ import os
 import requests
 from nltk.tokenize import WordPunctTokenizer
 import codecs
-from titles import scrape_title_sparql_from_solr_doc
 from scraper import get_todays_news
+from webapp.core import titles
 
 
 def file_full_path(filename):
@@ -36,7 +36,7 @@ def get_keywords(title, subtitle, article_body):
 
 
 # Trouver les articles dans lesquels les mots apparaissent
-def find_articles(key_words_input, n_articles):
+def find_archives(key_words_input, n_articles):
     root_url = 'http://dhlabsrv8.epfl.ch:8983/solr/letemps_article/select?q='
     url = u"{root}{query}{parameters}".format(root=root_url,
                                               query=' OR '.join(key_words_input).replace(' ', '%20'),
@@ -46,14 +46,15 @@ def find_articles(key_words_input, n_articles):
     response = json_page['response']
     docs = response['docs']
     for doc in docs:
-        found_title = scrape_title_sparql_from_solr_doc(doc)
+        #found_title = titlescrape_title_sparql_from_solr_doc(doc)
+        found_title = titles.get_archive_title(doc['id'])
         if found_title and found_title != 'Untitled Article':
             doc['title'] = found_title
         else:
             doc['title'] = '# ' + ' '.join(doc['content_txt_fr'].split(' ')[0:5])
     return docs
 
-def find_articles_by_id(ids):
+def find_archives_by_id(ids):
     """
     :arg list ids: list of articles IDs, as found in the 'id' metadata field.
     :return: list of article metadata
@@ -80,7 +81,7 @@ def find_articles_by_id(ids):
     response = json_page['response']
     docs = response['docs']
     for doc in docs:
-        found_title = scrape_title_sparql_from_solr_doc(doc)
+        found_title = titles.get_archive_title(doc['id'])
         if found_title and found_title != 'Untitled Article':
             doc['title'] = found_title
         else:
@@ -125,7 +126,7 @@ if __name__ == '__main__':
     print(u"----------------------------------------")
     print(u"\nArticle initial : {title}".format(title=article['title']))
 
-    articles = find_articles(key_words, 10)
+    articles = find_archives(key_words, 10)
     print(u'\n({narticles} résultats sélectionnés)'.format(narticles=len(articles)))
 
     article_input = u'{title} {subtitle} {article_body}'.format(title=article['title'],

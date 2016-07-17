@@ -18,23 +18,23 @@ def get_news_metadata(url):
 def get_archives_from_news(news):
     """ Return search engine matches (metadata dict) for a News article """
     if MOCK:
-        return mock_search_engine.find_articles()
+        return mock_search_engine.find_archives()
 
     article = scraper.scrape_article(news.url)
     keywords = search_engine.get_keywords(article['title'], article['subtitle'],
                                   article['article_body'])
-    archives = search_engine.find_articles(keywords, 10)
+    archives = search_engine.find_archives(keywords, 10)
     return archives
 
 def get_archives_from_archive(archive):
     """ Return list search engine matches (metadata dict) for an Archive """
     if MOCK:
-        return mock_search_engine.find_articles()
+        return mock_search_engine.find_archives()
 
     if archive.metadata is None:
         archive.populate_from_solr()
     keywords = search_engine.get_keywords(archive.title, '', archive.body)
-    return search_engine.find_articles(keywords, 10)
+    return search_engine.find_archives(keywords, 10)
 
 def get_keywords_from_news(news):
     keywords = search_engine.get_keywords(news.title, news.subtitle, news.body)
@@ -57,5 +57,5 @@ def get_archives_from_ids(ids):
     if MOCK:
         return mock_search_engine.find_articles_by_ids(ids_solr)
 
-    return search_engine.find_articles_by_id(ids_solr)
+    return search_engine.find_archives_by_id(ids_solr)
 
