@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 import os
-import datetime
 
-from webapp.core import search_engine
-from webapp.core import scraper
 from webapp.public import core_interface
 from webapp.user.models import ArticleRelation
 
 MOCK = True if os.environ.get("WEBAPP_MOCK_RELATIONS") == 'True' else False
 
 
-def get_relations_by_id(id):
+def get_relations_by_id(article_id):
     """ Returns a list of all associated News/Archive IDs """
 
     if MOCK:
@@ -22,21 +19,21 @@ def get_relations_by_id(id):
             'archive$$JDG_1993_05_06#17#Ar01701',
             'archive$$JDG_1992_11_24#19#Ar01907',
         ]
-        return [get_article(id) for id in ids]
+        return [get_article(article_id) for article_id in ids]
 
     # id1 -> id2 relations:
-    relations = ArticleRelation.query.filter_by(article1_id=id).all()
+    relations = ArticleRelation.query.filter_by(article1_id=article_id).all()
     print "relations 1", relations
     ids = set(relation.article2_id for relation in relations)
 
     # id2 -> id1 relations:
-    relations = ArticleRelation.query.filter_by(article2_id=id).all()
+    relations = ArticleRelation.query.filter_by(article2_id=article_id).all()
     print "relations 2", relations
     ids = ids.union(relation.article1_id for relation in relations)
 
     print ids
 
-    return [get_article(id) for id in ids]
+    return [get_article(article_id) for article_id in ids]
 
 
 separator = "$$"
